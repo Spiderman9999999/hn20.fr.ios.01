@@ -1,0 +1,24 @@
+1) Khi Push screen B từ screen A: có các delegate sau trong view controller được gọi
+
+ThangND26: Screen A viewDidLoad
+ThangND26: Screen A viewWillAppear
+ThangND26: Screen A viewDidAppear
+ThangND26: Screen B viewDidLoad
+ThangND26: Screen A viewWillDisappear
+ThangND26: Screen B viewWillAppear
+ThangND26: Screen B viewDidAppear
+ThangND26: Screen A viewDidDisappear
+
+
+2) - Khi back lại screen A từ screen B: có các delegate sau trong view controller được gọi
+
+ThangND26: Screen A viewDidLoad
+ThangND26: Screen B viewWillDisappear
+ThangND26: Screen A viewWillAppear
+ThangND26: Screen A viewDidAppear
+ThangND26: Screen B viewDidDisappear
+
+
+3) -Khi User tap button Home của iPhone để cho app xuống background rồi mở lại app: không delegate nào trong view controller được gọi
+
+2020-04-02 22:47:21.188103+0700 bai3[7732:863029] Can't end BackgroundTask: no background task exists with identifier 8 (0x8), or it may have already been ended. Break in UIApplicationEndBackgroundTaskError() to debug.

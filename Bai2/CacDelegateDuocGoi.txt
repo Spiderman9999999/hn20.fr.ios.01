@@ -1,0 +1,73 @@
+
+1) Khi user quit app từ fast app switcher (multi task)  thì đây là output của project  
+
+2020-04-02 20:15:17.221320+0700 Bai2[5057:535019] ThangND26: willFinishLaunchingWithOptions
+2020-04-02 20:15:17.221602+0700 Bai2[5057:535019] ThangND26: didFinishLaunchingWithOptions
+2020-04-02 20:15:17.259513+0700 Bai2[5057:535019] ThangND26: applicationDidBecomeActive
+2020-04-02 20:15:31.890467+0700 Bai2[5057:535019] ThangND26: applicationWillResignActive
+2020-04-02 20:15:33.428696+0700 Bai2[5057:535019] ThangND26: applicationDidEnterBackground
+2020-04-02 20:15:33.436689+0700 Bai2[5057:535019] Can't end BackgroundTask: no background task exists with identifier 2 (0x2), or it may have already been ended. Break in UIApplicationEndBackgroundTaskError() to debug.
+2020-04-02 20:15:33.436842+0700 Bai2[5057:535019] ThangND26: applicationWillTerminate
+
+Giải thích: 
+- willFinishLaunchingWithOptions:delegate này sẽ được gọi sau khi app đã khởi chạy thành công.
+- didFinishLaunchingWithOptions: delegate này được gọi trước khi view đầu tiên của app được hiển thị
+- applicationDidBecomeActive: delegate được gọi khi app chuyển trạng thái Active, lúc này app có thể tương tác với người dùng
+- applicationWillResignActive: delegate này được gọi khi app sắp chuyển từ trạng thái Active sang In-Active khi người dùng fast switch app. 
+- applicationDidEnterBackground: delegate này được gọi để báo cho app biết nó đang không chạy ở dưới foreground và app đang ở background. 
+- Do không định nghĩa các background task nên output báo Can't end BackgroundTask
+- applicationWillTerminate: khi người dùng quit app từ fast switch app, delegate này được gọi khi app chuẩn bị bị xoá khỏi bô nhớ.
+
+2) Khi app bị crash thì đây là output của project 
+
+2020-04-02 20:44:20.173173+0700 Bai2[5329:606006] ThangND26: willFinishLaunchingWithOptions
+2020-04-02 20:44:20.173386+0700 Bai2[5329:606006] ThangND26: didFinishLaunchingWithOptions
+2020-04-02 20:44:20.210934+0700 Bai2[5329:606006] ThangND26: applicationDidBecomeActive
+Fatal error: file /Users/apple/Desktop/Bai2/Bai2/ViewController.swift, line 14
+2020-04-02 20:44:21.443183+0700 Bai2[5329:606006] Fatal error: file /Users/apple/Desktop/Bai2/Bai2/ViewController.swift, line 14
+(lldb) 
+
+Giải thích: 
+- willFinishLaunchingWithOptions:delegate này sẽ được gọi sau khi app đã khởi chạy thành công.
+- didFinishLaunchingWithOptions: delegate này được gọi trước khi view đầu tiên của app được hiển thị
+- applicationDidBecomeActive: delegate được gọi khi app chuyển trạng thái Active, lúc này app có thể tương tác với người dùng
+- FatalError: báo lỗi fatal error gây crash ứng dụng tại file ViewController.swift, dòng 14
+
+3) Khi app bị suspended thì đây là output của project:
+
+2020-04-02 20:52:12.293607+0700 Bai2[5505:624727] ThangND26: willFinishLaunchingWithOptions
+2020-04-02 20:52:12.293896+0700 Bai2[5505:624727] ThangND26: didFinishLaunchingWithOptions
+2020-04-02 20:52:12.372640+0700 Bai2[5505:624727] ThangND26: applicationDidBecomeActive
+2020-04-02 20:52:14.938019+0700 Bai2[5505:624727] ThangND26: applicationWillResignActive
+2020-04-02 20:52:15.498207+0700 Bai2[5505:624727] ThangND26: applicationDidEnterBackground
+2020-04-02 20:52:16.055649+0700 Bai2[5505:624727] Can't end BackgroundTask: no background task exists with identifier 1 (0x1), or it may have already been ended. Break in UIApplicationEndBackgroundTaskError() to debug.
+
+Giải thích: 
+- willFinishLaunchingWithOptions:delegate này sẽ được gọi sau khi app đã khởi chạy thành công.
+- didFinishLaunchingWithOptions: delegate này được gọi trước khi view đầu tiên của app được hiển thị
+- applicationDidBecomeActive: delegate được gọi khi app chuyển trạng thái Active, lúc này app có thể tương tác với người dùng
+- applicationWillResignActive: delegate này được gọi khi app sắp chuyển từ trạng thái Active sang In-Active khi người dùng thoát ra khỏi app
+- applicationDidEnterBackground: delegate này được gọi để báo cho app biết nó đang không chạy ở dưới foreground và app đang ở background. 
+- Do không định nghĩa các background task nên output báo Can't end BackgroundTask. 
+
+4) Khi user mở app khác và trở lại app ban đầu thì đây là output của project:
+
+2020-04-02 21:03:20.023027+0700 Bai2[5688:652421] ThangND26: willFinishLaunchingWithOptions
+2020-04-02 21:03:20.023301+0700 Bai2[5688:652421] ThangND26: didFinishLaunchingWithOptions
+2020-04-02 21:03:20.081416+0700 Bai2[5688:652421] ThangND26: applicationDidBecomeActive
+2020-04-02 21:03:22.165116+0700 Bai2[5688:652421] ThangND26: applicationWillResignActive
+2020-04-02 21:03:23.025294+0700 Bai2[5688:652421] ThangND26: applicationDidEnterBackground
+2020-04-02 21:03:23.903752+0700 Bai2[5688:652421] Can't end BackgroundTask: no background task exists with identifier 1 (0x1), or it may have already been ended. Break in UIApplicationEndBackgroundTaskError() to debug.
+2020-04-02 21:03:47.514061+0700 Bai2[5688:652421] ThangND26: applicationWillEnterForeground
+2020-04-02 21:03:47.959816+0700 Bai2[5688:652421] ThangND26: applicationDidBecomeActive
+
+
+Giải thích: 
+- willFinishLaunchingWithOptions:delegate này sẽ được gọi sau khi app đã khởi chạy thành công.
+- didFinishLaunchingWithOptions: delegate này được gọi trước khi view đầu tiên của app được hiển thị
+- applicationDidBecomeActive: delegate được gọi khi app chuyển trạng thái Active, lúc này app có thể tương tác với người dùng
+- applicationWillResignActive: delegate này được gọi khi app sắp chuyển từ trạng thái Active sang In-Active khi người dùng chuyển sang app khác từ app ban đầu
+- applicationDidEnterBackground: delegate này được gọi để báo cho app biết nó đang không chạy ở dưới foreground và app đang ở background. 
+- Do không định nghĩa các background task nên output báo Can't end BackgroundTask. 
+- applicationWillEnterForeground: delegate này được gọi khi chuyển trạng thái từ Background sang foreground in active , lúc người dùng trở lại app ban đầu.
+-applicationDidBecomeActive: app chuyển trạng thái in active sang active lúc này app lại có thể tương tác  với người dùng.
