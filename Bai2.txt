@@ -1,0 +1,39 @@
+Bài 2)
+1) Phân biên các thư mục Document, Library, tmp
+
+- Document: Sử dụng thư mục này để lưu trữ nội dung do user tạo. Nội dung của thư mục này có thể được cung cấp cho user thông qua file sharing; do đó, thư mục này chỉ nên chứa các file mà có thể muốn hiển thị cho user. Nội dung của thư mục này được sao lưu qua iTunes và iCloud.
+
+- Library: Là thư mục chứa các thư mục con lưu trữ dữ liệu không phải dữ liệu của user , như thư mục Application Support và thư mục Caches, cũng có thể tạo thêm thư mục khác. Các file trong các thư mục này không được để lộ cho user biểt, và các thư mục này không nên  lưu trữ file do user tạo. Ngoại trừ thư mục con Caches, nội dung thư mục Library cũng được sao lưu qua iITunes và iCloud.
+
+- Temp: Sử dụng thư mục này để ghi các file tạm thời không cần phải tồn tại giữa mỗi lần launch ứng dụng. Ứng dụng sẽ xóa các file  khỏi thư mục này khi chúng không còn cần thiết nữa; Tuy nhiên, hệ thống cũng có thể xóa thư mục này khi ứng dụng không chạy. Các file trong thư mục temp không được sao lưu qua iTunes và iCloud.
+
+2)Khi nào dùng các thư mục trên, các thư mục trên dùng lưu trữ data gì
+
+- Sử dụng thư mục Document để lưu dữ liệu người dùng. Dữ liệu người dùng thường bao gồm bất kỳ file nào lập trình viên muốn hiển thị cho user, bất cứ file gì lập trình viên muốn user tạo, nhập, xóa hoặc chỉnh sửa. Đối với ứng dụng vẽ, dữ liệu người dùng bao gồm các file đồ họa mà người dùng có thể tạo, chỉnh sửa, xoá. . Đối với một trình soạn thảo văn bản,  bao gồm file văn bản. Các ứng dụng video và âm thanh  có thể bao gồm các file mà user đã tải xuống để xem hoặc nghe sau này.
+
+- Sử dụng thư mục  Library/Application support/  để lưu các file hỗ trợ do ứng dụng tạo, cụ thể là các file mà ứng dụng sử dụng để chạy nhưng vẫn bị ẩn khỏi user. Thư mục này cũng có thể bao gồm các file dữ liệu, file cấu hình, templates và các phiên bản được sửa đổi của resource được tải từ app bundle.
+
+- Sử dụng thư mục Library/Caches/ để lưu các file cache. File cache là các file lưu trữ dữ liệu nhất định. Mục đích của việc lưu file cache là để tăng tốc, giúp thiết bị hoạt động “mượt” hơn và để giảm số lượng dữ liệu được xử lý. Lưu ý rằng hệ thống có thể xóa thư mục Caches  để giải phóng không gian đĩa, vì vậy ứng dụngi có thể phải tạo lại hoặc tải xuống các file này khi cần.
+
+- Sử dụng thư mục  tmp/ để lưu trữ các file tạm thời. Các file tạm thời là các file không cần tồn tại lâu dài.  Nên xoá các file này sau khi đã làm việc xong với chúng để tiết kiệm bộ nhớ. Hệ thống sẽ định kỳ lọc các file này khi ứng dụng không chạy. 
+
+3)Sample code
+
+  private func createDirectory() -> Bool {
+        let fileManager = FileManager.default
+        let urlManager = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+        let docURL = urlManager[0]
+        
+        let newDir = docURL.appendingPathComponent("CachedImages").path
+        do {
+            try fileManager.createDirectory(atPath: newDir, withIntermediateDirectories: true, attributes: nil)
+	    return true
+        }
+        catch let error as NSError {
+            print(error.localizedDescription)
+	    return false
+        }
+        
+        }
+        
+    
